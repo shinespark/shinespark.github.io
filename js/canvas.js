@@ -3,13 +3,19 @@ $(function() {
   var w = $(window).width();
   var h = $(window).height();
   $('#colors-sketch')
-    .attr('width', w * 0.9)
+    .attr('width', w)
     .attr('height', h * 0.9);
 
   $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-    $('.tools').append("<a href='#colors-sketch' class='change-color' data-color='" + this + "' style='background: " + this + ";'></a> ");
+    $('.color-tools').append("<a href='#colors-sketch' class='change-color' data-color='" + this + "' style='background: " + this + ";'></a> ");
   });
   $('#colors-sketch').sketch();
 
-
+  $(window).resize(function(){
+    var w = $(window).width();
+    var h = $(window).height();
+    $('#colors-sketch')
+      .attr('width', w)
+      .attr('height', h * 0.9);
+  })
 });

@@ -3,17 +3,35 @@
   width: 100%;
 }
 
-.change-color {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #ccc;
-}
+.tools {
+  position: absolute;
+  float: left;
+  bottom: 5px;
 
-.change-size {
-  display: inline-block;
-  background-color: #ccc;
-  border-radius: 20px;
-  text-align: center;
-  border-radius: 10px;
+  .change-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .change-size {
+    display: inline-block;
+    background-color: #ccc;
+    border-radius: 20px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .data-tools {
+    display: inline-block;
+    background-color: #333;
+    width: 5em;
+
+
+    a {
+      color: 999;
+      text-decoration: none;
+    }
+  }
 }
