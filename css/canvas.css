@@ -6,11 +6,13 @@
   position: absolute;
   float: left;
   bottom: 5px; }
-  .tools .change-color {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc; }
+  .tools .color-tools {
+    padding-right: 20px; }
+    .tools .color-tools .change-color {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #ccc; }
   .tools .change-size {
     display: inline-block;
     background-color: #ccc;

@@ -8,12 +8,17 @@
   float: left;
   bottom: 5px;
 
-  .change-color {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #ccc;
+  .color-tools{
+    padding-right: 20px;
+
+    .change-color {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #ccc;
+    }
   }
+
 
   .change-size {
     display: inline-block;
