@@ -1,0 +1,55 @@
+!!!
+%html(lang='ja')
+  %head
+    %meta(charset='utf-8')
+    %meta(name='viewport' content='width=divice-width, initial-scale=1, shrink-to-fit=no')
+    %meta(http-equiv='x-ua-compatible' content='ie=edge')
+
+    %link(rel='stylesheet' href='./css/bootstrap.min.css')
+    %link(rel='stylesheet' href='./css/index.css')
+  %body
+    // navbar
+    %nav.navbar.navbar-light.bg-faded
+      %button.navbar-toggler.hidden-sm-up(type='button' data-toggle='collapse' data-target='#exCollapsingNavbar')
+        &#9776;
+      .collapse.navbar-toggleable-xs#exCollapsingNavbar
+        %a.navbar-brand(href='#')
+          Responsive navbar
+          %ul.nav.navbar-nav
+            %li.nav-item.active
+              %a.nav-link(href='#top')
+                Top
+                %span.sr-only
+                  (current)
+            %li.nav-item.active
+              %a.nav-link(href='#about')
+                About
+            %li.nav-item.active
+              %a.nav-link(href='#works')
+                Works
+            %li.nav-item.active
+              %a.nav-link(href='#contact')
+                Contact
+
+
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.center-block.text-xs-center
+            Portfolio
+
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.center-block.text-xs-center#about
+            about
+
+    %footer.contaner-fluid
+      .row
+        .col-xs-12
+          %ul.text-muted
+            %li
+              %a(href='//github.com/shinespark') GitHub
+
+    %script(src='./js/jquery-2.1.4.min.js')
+    %script(src='./js/bootstrap.min.js')

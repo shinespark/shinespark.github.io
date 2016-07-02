@@ -13,6 +13,8 @@
   },
   "scripts": {
     "start": "gulp default",
+    "gulp": "gulp",
+    "scss-lint": "gulp scss-lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
