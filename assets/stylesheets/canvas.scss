@@ -1,0 +1,19 @@
+#wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.change-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+}
+
+.change-size {
+  display: inline-block;
+  background-color: #ccc;
+  border-radius: 20px;
+  text-align: center;
+  border-radius: 10px;
+}

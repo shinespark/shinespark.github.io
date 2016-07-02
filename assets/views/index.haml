@@ -6,6 +6,7 @@
     %meta(http-equiv='x-ua-compatible' content='ie=edge')
 
     %link(rel='stylesheet' href='./css/bootstrap.min.css')
+    %link(rel='stylesheet' href='./css/index.css')
   %body
     // navbar
     %nav.navbar.navbar-light.bg-faded
@@ -33,8 +34,22 @@
 
     .container-fluid
       .row
-        .col-md-12
-          test
+        .col-xs-12
+          %h1.center-block.text-xs-center
+            Portfolio
+
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.center-block.text-xs-center#about
+            about
+
+    %footer.contaner-fluid
+      .row
+        .col-xs-12
+          %ul.text-muted
+            %li
+              %a(href='//github.com/shinespark') GitHub
 
     %script(src='./js/jquery-2.1.4.min.js')
     %script(src='./js/bootstrap.min.js')
