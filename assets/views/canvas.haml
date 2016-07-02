@@ -13,7 +13,6 @@
           %canvas#colors-sketch
 
         %div.tools
-          %span.color-tools
 
           %a.change-size(href="#colors-sketch" data-size='1' style='height: 8px; width: 8px;')
           %a.change-size(href="#colors-sketch" data-size='3' style='height: 10px; width: 10px;')
@@ -21,6 +20,10 @@
           %a.change-size(href="#colors-sketch" data-size='10' style='height: 15px; width: 15px;')
           %a.change-size(href="#colors-sketch" data-size='15' style='height: 18px; width: 18px;')
           %a.change-size(href="#colors-sketch" data-size='20' style='height: 20px; width: 20px;')
+
+          %div.color-tools
+
+          / %a.other-tools(href="#colors-sketch" data-tool='eraser') Eraser
 
 
     %script(src='./js/jquery-2.1.4.min.js')

@@ -6,10 +6,10 @@ $(function() {
     .attr('width', w)
     .attr('height', h * 0.9);
 
-  $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+  $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000'], function() {
     $('.color-tools').append("<a href='#colors-sketch' class='change-color' data-color='" + this + "' style='background: " + this + ";'></a> ");
   });
-  $('#colors-sketch').sketch();
+  $('#colors-sketch').sketch({defaultColor: "#000"});
 
   $(window).resize(function(){
     var w = $(window).width();
