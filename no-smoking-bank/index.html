@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>禁煙積立バンク / NoSmokingBank</title>
+<meta name="description" content="禁煙で浮いたたばこ代を毎日積み立て、投資に回していたらいくらになっていたかを同じグラフで見せる iOS アプリ。">
+<link rel="icon" href="./img/icon.png">
+<link rel="apple-touch-icon" href="./img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="禁煙積立バンク / NoSmokingBank">
+<meta property="og:description" content="禁煙で浮いたたばこ代を毎日積み立て、投資に回していたらいくらになっていたかを同じグラフで見せる iOS アプリ。">
+<meta property="og:image" content="https://shinespark.github.io/no-smoking-bank/img/icon.png">
+<meta property="og:url" content="https://shinespark.github.io/no-smoking-bank/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --cyan: #22c7f0;
+    --blue: #0a7cff;
+    --ink: #16171a;
+    --muted: #6b6d75;
+    --bg: #ffffff;
+    --bg-alt: #f5f6f8;
+    --line: #e4e6ea;
+    --card: #ffffff;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f2f3f5;
+      --muted: #9b9ea6;
+      --bg: #0f1013;
+      --bg-alt: #17191d;
+      --line: #2a2d33;
+      --card: #17191d;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); }
+
+  html[lang="ja"] .en, html[lang="en"] .ja { display: none; }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  /* header */
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .bar { display: flex; align-items: center; gap: 12px; height: 64px; }
+  .bar img { width: 32px; height: 32px; border-radius: 8px; }
+  .bar b { font-size: 16px; letter-spacing: .01em; }
+  .bar .spacer { flex: 1; }
+  .langs { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .langs button {
+    font: inherit; font-size: 13px; line-height: 1;
+    padding: 7px 13px; border: 0; background: transparent;
+    color: var(--muted); cursor: pointer;
+  }
+  .langs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  /* hero */
+  .hero { padding: 72px 0 8px; text-align: center; }
+  .hero .icon {
+    width: 116px; height: 116px; border-radius: 26px;
+    box-shadow: 0 12px 34px rgba(10, 124, 255, .22);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 46px); line-height: 1.25;
+    margin: 26px 0 6px; letter-spacing: -.02em;
+  }
+  .hero .sub {
+    font-size: clamp(17px, 2.4vw, 20px); font-weight: 600; margin: 0;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lede { color: var(--muted); max-width: 34em; margin: 18px auto 0; }
+
+  .cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-top: 30px; padding: 14px 26px;
+    border-radius: 999px; text-decoration: none;
+    color: #fff; font-weight: 600; font-size: 16px;
+    background: linear-gradient(120deg, var(--cyan), var(--blue));
+    box-shadow: 0 8px 22px rgba(10, 124, 255, .3);
+  }
+  .cta svg { width: 17px; height: 17px; fill: currentColor; }
+  .req { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+  /* shots */
+  .shots {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 22px; padding: 56px 0 8px;
+  }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  @media (max-width: 700px) {
+    .shots { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; gap: 32px; }
+  }
+
+  /* features */
+  .features { padding: 64px 0; }
+  h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 26px;
+  }
+  /* 和文は字面が広く、欧文向けのトラッキングだと間延びする */
+  html[lang="ja"] h2 { letter-spacing: .06em; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px 26px 28px;
+  }
+  .card h3 { font-size: 18px; margin: 0 0 8px; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+  .card .dot {
+    display: block; width: 30px; height: 4px; border-radius: 2px; margin-bottom: 18px;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+  }
+
+  /* closing */
+  .closing {
+    background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 64px 0; text-align: center;
+  }
+  .closing p { font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; margin: 0; letter-spacing: -.01em; }
+  .closing .cta { margin-top: 26px; }
+
+  footer { padding: 46px 0 64px; color: var(--muted); font-size: 14.5px; }
+  footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 22px; padding: 0; margin: 0 0 20px; }
+  footer .small { margin: 0; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <img src="./img/icon.png" alt="">
+    <b><span class="ja">禁煙積立バンク</span><span class="en">NoSmokingBank</span></b>
+    <span class="spacer"></span>
+    <div class="langs">
+      <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <img class="icon" src="./img/icon.png" alt="">
+    <h1><span class="ja">禁煙積立バンク</span><span class="en">NoSmokingBank</span></h1>
+    <p class="sub"><span class="ja">たばこ代を貯金と投資で見える化</span><span class="en">Quit smoking, grow savings</span></p>
+    <p class="lede">
+      <span class="ja">禁煙で浮いたたばこ代を、毎日そのまま積み立て。もし投資に回していたらいくらになっていたかも、同じグラフで確かめられます。値上げにも対応し、節目には通知でお知らせします。</span>
+      <span class="en">Bank the cigarette money you no longer spend, every single day. See what it would be worth if you had invested it instead, right on the same chart.</span>
+    </p>
+    <a class="cta" href="https://apps.apple.com/app/id6752426099">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="ja">App Store で見る</span><span class="en">View on the App Store</span>
+    </a>
+    <p class="req"><span class="ja">iPhone・iPad 対応 / 無料</span><span class="en">iPhone and iPad / Free</span></p>
+  </section>
+
+  <section class="wrap shots">
+    <img class="ja" src="./img/ja-01-home.webp" width="600" height="1304" loading="lazy" alt="ホーム画面。禁煙できた日数・本数・節約できたお金と、累積の面グラフ。">
+    <img class="ja" src="./img/ja-02-simulation.webp" width="600" height="1304" loading="lazy" alt="シミュレーション画面。期間と想定利回りのスライダーと将来の資産。">
+    <img class="ja" src="./img/ja-03-profile.webp" width="600" height="1304" loading="lazy" alt="禁煙プロフィール画面。開始日・本数・価格・価格改定の登録。">
+    <img class="en" src="./img/en-01-home.webp" width="600" height="1304" loading="lazy" alt="Home screen with smoke-free days, cigarettes skipped, money saved and the cumulative chart.">
+    <img class="en" src="./img/en-02-simulation.webp" width="600" height="1304" loading="lazy" alt="Simulation screen with sliders for the time horizon and expected return.">
+    <img class="en" src="./img/en-03-profile.webp" width="600" height="1304" loading="lazy" alt="Profile screen for the quit date, cigarettes per day, pack price and price increases.">
+  </section>
+
+  <section class="wrap features">
+    <h2><span class="ja">できること</span><span class="en">Features</span></h2>
+    <div class="grid">
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">節約できたお金がグラフで伸びていく</span><span class="en">Watch your savings climb</span></h3>
+        <p>
+          <span class="ja">禁煙を始めた日・1日に吸っていた本数・1箱の価格を入れるだけ。あとはアプリが毎日の節約額を計算して、累積のグラフを描きます。日数・吸わずに済んだ本数・節約できたお金がひと目で分かります。</span>
+          <span class="en">Enter the day you quit, how many cigarettes you smoked per day, and the price of a pack. From there the app works out what you save each day and draws the running total, alongside your smoke-free days and the cigarettes you never smoked.</span>
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">「もし投資に回していたら」を重ねて表示</span><span class="en">See what investing it would have been worth</span></h3>
+        <p>
+          <span class="ja">節約できたお金を、そのまま毎日インデックス投資に回していたら今いくらになっていたか。想定利回りを設定すると、貯金額と投資評価額を同じグラフに重ねて表示します。</span>
+          <span class="en">What if that money had gone into index funds day by day instead? Set an expected annual return and the app overlays the portfolio value on the very same chart as your savings.</span>
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">この先どうなるかをシミュレーション</span><span class="en">Simulate where this is heading</span></h3>
+        <p>
+          <span class="ja">今のペースを1年後から50年後まで延長したら、資産はいくらになるのか。期間と想定利回りをスライダーで動かして、未来の自分の資産を確かめられます。</span>
+          <span class="en">Stretch your current pace out from one year to fifty. Move the sliders for the time horizon and the expected return, and see the assets your future self could be holding.</span>
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">たばこの値上げにも対応</span><span class="en">Built for price increases</span></h3>
+        <p>
+          <span class="ja">価格改定日と新しい価格を登録すれば、値上げをまたいだ期間も正しく計算します。長く続けるほど効いてくる部分です。</span>
+          <span class="en">Record the date and the new price whenever cigarettes go up, and the periods on either side are still calculated correctly. The longer you keep going, the more this matters.</span>
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">節目には通知でお知らせ</span><span class="en">Notifications at every milestone</span></h3>
+        <p>
+          <span class="ja">禁煙1日・3日・1週間・1ヶ月……といった日数の節目や、節約金額の節目に達したときに通知が届きます。通知は設定画面からいつでもオフにできます。</span>
+          <span class="en">Get a notification when you hit a milestone, whether it's days smoke-free — day 1, day 3, one week, one month and beyond — or an amount of money saved. Turn them off any time from Settings.</span>
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3><span class="ja">データはあなたの端末と iCloud の中だけに</span><span class="en">Your data stays on your device and in your iCloud</span></h3>
+        <p>
+          <span class="ja">入力したデータが開発者のサーバーに送られることはありません。iCloud を通じて、同じ Apple Account の iPhone・iPad の間でのみ同期します。</span>
+          <span class="en">Nothing you enter is sent to a developer-run server. It syncs through iCloud between your own iPhone and iPad signed in to the same Apple Account.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <p>
+        <span class="ja">禁煙は我慢ではなく、積立です。<br>今日から貯め始めましょう。</span>
+        <span class="en">Quitting isn't going without. It's putting away.<br>Start banking today.</span>
+      </p>
+      <a class="cta" href="https://apps.apple.com/app/id6752426099">
+        <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span class="ja">App Store で見る</span><span class="en">View on the App Store</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <ul>
+    <li><a href="https://apps.apple.com/app/id6752426099"><span class="ja">App Store</span><span class="en">App Store</span></a></li>
+    <li><a href="https://sites.google.com/view/no-smoking-bank/privacy-policy"><span class="ja">プライバシーポリシー</span><span class="en">Privacy Policy</span></a></li>
+    <li><a href="https://docs.google.com/forms/d/1O_JKH8uG6Xcj0YK0Dyldgm1jr2FIXeTnW4S4r6BVZBk/viewform"><span class="ja">お問い合わせ</span><span class="en">Support</span></a></li>
+    <li><a href="https://github.com/shinespark">GitHub</a></li>
+  </ul>
+  <p class="small">© 2026 Yuz Lab.</p>
+</footer>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.langs button');
+    function apply(lang) {
+      document.documentElement.lang = lang;
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    apply(saved || ((navigator.language || 'ja').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en'));
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.lang); });
+    });
+  })();
+</script>
+
+</body>
+</html>
