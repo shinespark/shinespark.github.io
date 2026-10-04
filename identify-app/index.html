@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>識別のアプリ - 不思議のダンジョン攻略アプリ</title>
+<meta name="description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャートとおまじないの記録にも対応。">
+<link rel="icon" href="./img/icon.png">
+<link rel="apple-touch-icon" href="./img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="識別のアプリ - 不思議のダンジョン攻略アプリ">
+<meta property="og:description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャートとおまじないの記録にも対応。">
+<meta property="og:image" content="https://shinespark.github.io/identify-app/img/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="識別のアプリの識別アイテムリスト画面。識別したアイテムをチェックして、未識別のアイテムをひと目で。">
+<meta property="og:url" content="https://shinespark.github.io/identify-app/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --mint: #4ccfb0;
+    --teal: #00897b;
+    --ink: #16171a;
+    --muted: #6b6d75;
+    --bg: #ffffff;
+    --bg-alt: #f4f7f6;
+    --line: #e4e6ea;
+    --card: #ffffff;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --teal: #4dcdb0;
+      --ink: #f2f3f5;
+      --muted: #9b9ea6;
+      --bg: #0f1013;
+      --bg-alt: #17191d;
+      --line: #2a2d33;
+      --card: #17191d;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--teal); }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .bar { display: flex; align-items: center; gap: 12px; height: 64px; }
+  .bar img { width: 32px; height: 32px; border-radius: 8px; }
+  .bar b { font-size: 16px; letter-spacing: .01em; }
+
+  .hero { padding: 72px 0 8px; text-align: center; }
+  .hero .icon {
+    width: 116px; height: 116px; border-radius: 26px;
+    box-shadow: 0 12px 34px rgba(0, 137, 123, .24);
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 46px); line-height: 1.25;
+    margin: 26px 0 6px; letter-spacing: -.02em;
+  }
+  .hero .sub {
+    font-size: clamp(17px, 2.4vw, 20px); font-weight: 600; margin: 0;
+    background: linear-gradient(90deg, var(--mint), var(--teal));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lede { color: var(--muted); max-width: 34em; margin: 18px auto 0; }
+
+  .cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-top: 30px; padding: 14px 26px;
+    border-radius: 999px; text-decoration: none;
+    color: #fff; font-weight: 600; font-size: 16px;
+    background: linear-gradient(120deg, #4ccfb0, #00897b);
+    box-shadow: 0 8px 22px rgba(0, 137, 123, .3);
+  }
+  .cta svg { width: 17px; height: 17px; fill: currentColor; }
+  .req { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+  .shots {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 22px; padding: 56px 0 8px;
+  }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  @media (max-width: 700px) {
+    .shots { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; gap: 32px; }
+  }
+
+  .features { padding: 64px 0 24px; }
+  h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: .06em;
+    color: var(--muted);
+    margin: 0 0 26px;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px 26px 28px;
+  }
+  .card h3 { font-size: 18px; margin: 0 0 8px; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+  .card .dot {
+    display: block; width: 30px; height: 4px; border-radius: 2px; margin-bottom: 18px;
+    background: linear-gradient(90deg, var(--mint), var(--teal));
+  }
+
+  .dungeons { padding: 40px 0 64px; }
+  .titles { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; margin: 0; }
+  @media (max-width: 700px) { .titles { grid-template-columns: 1fr; } }
+  .titles div { padding: 14px 0; border-top: 1px solid var(--line); }
+  .titles dt { font-weight: 700; font-size: 16px; }
+  .titles dd { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+  .note { color: var(--muted); font-size: 14px; margin: 18px 0 0; }
+
+  .closing {
+    background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 64px 0; text-align: center;
+  }
+  .closing p { font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; margin: 0; letter-spacing: -.01em; }
+  .closing .cta { margin-top: 26px; }
+
+  footer { padding: 46px 0 64px; color: var(--muted); font-size: 14.5px; }
+  footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 22px; padding: 0; margin: 0 0 20px; }
+  footer .small { margin: 0 0 8px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <img src="./img/icon.png" alt="">
+    <b>識別のアプリ</b>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <img class="icon" src="./img/icon.png" alt="">
+    <h1>識別のアプリ</h1>
+    <p class="sub">不思議のダンジョンのアイテム識別をサポート</p>
+    <p class="lede">「風来のシレン」や「トルネコの大冒険」の “もっと不思議のダンジョン” を攻略するためのアプリです。識別したアイテムをチェックして、未識別のアイテムをひと目で絞り込めます。杖・壺の価格チャートや、おまじないの記録にも対応しています。</p>
+    <a class="cta" href="https://apps.apple.com/jp/app/id1558625294">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store で見る
+    </a>
+    <p class="req">iPhone・iPad 対応 / 無料</p>
+  </section>
+
+  <section class="wrap shots">
+    <img src="./img/01-item-list.webp" width="600" height="1304" loading="lazy" alt="識別アイテムリスト画面。アイテムごとのチェックボックスと買値・売値、カテゴリの切り替え。">
+    <img src="./img/02-chart.webp" width="600" height="1304" loading="lazy" alt="杖・壺価格チャート画面。回数ごとの買値・売値の一覧。">
+    <img src="./img/03-magic.webp" width="600" height="1304" loading="lazy" alt="おまじない画面。おまじないでもらえるアイテムのチェックリスト。">
+  </section>
+
+  <section class="wrap features">
+    <h2>できること</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="dot"></span>
+        <h3>識別したアイテムをチェック</h3>
+        <p>「識別アイテムリスト」で、識別済みのアイテムにチェックを付けて管理できます。「未識別のみ」をオンにすると、まだ識別していないアイテムだけに絞り込めます。</p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>杖・壺は価格から識別</h3>
+        <p>「杖・壺価格チャート」で、お店での買値・売値を回数や容量ごとに一覧できます。値段からどの杖・壺かを見分けるのに使えます。</p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>おまじないも記録</h3>
+        <p>シレン2 とシレンGB2 では、おまじないでもらえるアイテムもチェックできます。</p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>識別率がひと目で分かる</h3>
+        <p>カテゴリごとの識別率をアイコンのまわりのリングで表示します。すべて識別すると王冠が付きます。カテゴリはタブのタップか左右のスワイプで切り替えられます。</p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>ダンジョンの切り替えはワンタップ</h3>
+        <p>画面上部のダンジョン名をタップするだけで、作品・ダンジョンを切り替えられます。チェックの状態はダンジョンごとに保存されます。</p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>iPhone と iPad で同期</h3>
+        <p>チェックした内容は iCloud を通じて、同じ Apple Account の iPhone・iPad の間で同期されます。データが開発者のサーバーに送られることはありません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap dungeons">
+    <h2>対応作品・ダンジョン</h2>
+    <dl class="titles">
+      <div><dt>トルネコの大冒険</dt><dd>不思議のダンジョン / もっと不思議のダンジョン</dd></div>
+      <div><dt>風来のシレン（SFC）</dt><dd>テーブルマウンテン / フェイの最終問題</dd></div>
+      <div><dt>風来のシレンGB 月影村の怪物</dt><dd>月影村出口</dd></div>
+      <div><dt>トルネコの大冒険2（PS）</dt><dd>もっと不思議のダンジョン</dd></div>
+      <div><dt>トルネコの大冒険2（GBA）</dt><dd>もっと不思議のダンジョン</dd></div>
+      <div><dt>風来のシレン2 鬼襲来!シレン城!</dt><dd>あかずの間 / 最果てへの道</dd></div>
+      <div><dt>風来のシレンGB2 砂漠の魔城</dt><dd>奈落の果て</dd></div>
+      <div><dt>風来のシレン外伝 女剣士アスカ見参!</dt><dd>白蛇島 / 裏白蛇島</dd></div>
+      <div><dt>風来のシレン5 フォーチュンタワーと運命のダイス</dt><dd>原始に続く穴 / 運命の地下</dd></div>
+      <div><dt>風来のシレン6 とぐろ島探検録</dt><dd>とぐろ島の神髄</dd></div>
+    </dl>
+    <p class="note">対応作品・ダンジョンは今後も追加予定です。</p>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <p>未識別のアイテムを、ひと目で。</p>
+      <a class="cta" href="https://apps.apple.com/jp/app/id1558625294">
+        <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        App Store で見る
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <ul>
+    <li><a href="https://apps.apple.com/jp/app/id1558625294">App Store</a></li>
+    <li><a href="./privacy-policy/">プライバシーポリシー</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScOjpxN7rwKPgArAJ1ulaLDwoQ6MJKAzvvT1nytPRdNrWqAMw/viewform">お問い合わせ</a></li>
+  </ul>
+  <p class="small">本アプリは個人が開発した非公式アプリです。株式会社スパイク・チュンソフト様とは一切関係がありません。</p>
+  <p class="small">© 2026 SHINESPARK</p>
+</footer>
+
+</body>
+</html>
