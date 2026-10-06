@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHINESPARK - Apps</title>
+<meta name="description" content="SHINESPARK がつくった iOS アプリの一覧。禁煙積立バンク、識別のアプリ。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SHINESPARK - Apps">
+<meta property="og:description" content="SHINESPARK がつくった iOS アプリの一覧。禁煙積立バンク、識別のアプリ。">
+<meta property="og:url" content="https://shinespark.github.io/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --ink: #16171a;
+    --muted: #6b6d75;
+    --bg: #ffffff;
+    --bg-alt: #f5f6f8;
+    --line: #e4e6ea;
+    --card: #ffffff;
+    --link: #0a7cff;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f2f3f5;
+      --muted: #9b9ea6;
+      --bg: #0f1013;
+      --bg-alt: #17191d;
+      --line: #2a2d33;
+      --card: #17191d;
+      --link: #4da3ff;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); }
+
+  html[lang="ja"] .en, html[lang="en"] .ja { display: none; }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  /* header */
+  header { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .bar { display: flex; align-items: center; gap: 12px; height: 64px; }
+  .bar b { font-size: 16px; letter-spacing: .04em; }
+  .bar .spacer { flex: 1; }
+  .langs { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .langs button {
+    font: inherit; font-size: 13px; line-height: 1;
+    padding: 7px 13px; border: 0; background: transparent;
+    color: var(--muted); cursor: pointer;
+  }
+  .langs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  /* hero */
+  .hero { padding: 64px 0 8px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 40px); line-height: 1.3; margin: 0; letter-spacing: -.02em; }
+  .hero p { color: var(--muted); margin: 10px 0 0; }
+
+  /* apps */
+  .apps { padding: 40px 0 72px; display: grid; gap: 20px; }
+  .app {
+    display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .app .icon { width: 96px; height: 96px; border-radius: 22px; display: block; }
+  .app h2 { font-size: 22px; line-height: 1.35; margin: 0; letter-spacing: -.01em; }
+  .app h2 a { color: inherit; text-decoration: none; }
+  .app h2 a:hover { text-decoration: underline; }
+  .app .sub { font-weight: 600; font-size: 15px; margin: 2px 0 0; }
+  .app .desc { color: var(--muted); font-size: 15.5px; line-height: 1.7; margin: 10px 0 0; }
+  .app .meta { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+  .app .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 999px; text-decoration: none;
+    font-size: 14.5px; font-weight: 600; line-height: 1.2;
+    border: 1px solid var(--line); color: var(--ink);
+  }
+  .btn.primary { border-color: transparent; color: #fff; }
+  .btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* アプリごとの色は各紹介ページの配色に揃える */
+  .nsb .sub { color: #0a7cff; }
+  .nsb .btn.primary { background: linear-gradient(120deg, #22c7f0, #0a7cff); }
+  .identify .sub { color: #00897b; }
+  .identify .btn.primary { background: linear-gradient(120deg, #4ccfb0, #00897b); }
+  @media (prefers-color-scheme: dark) {
+    .nsb .sub { color: #4da3ff; }
+    .identify .sub { color: #4dcdb0; }
+  }
+
+  @media (max-width: 560px) {
+    .app { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+    .app .icon { width: 72px; height: 72px; border-radius: 17px; }
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--muted); font-size: 14.5px; }
+  footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: 22px; padding: 0; margin: 0 0 16px; }
+  footer .small { margin: 0; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <b>SHINESPARK</b>
+    <span class="spacer"></span>
+    <div class="langs">
+      <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <h1><span class="ja">つくったアプリ</span><span class="en">Apps</span></h1>
+    <p><span class="ja">個人で開発・配信している iOS アプリです。</span><span class="en">iOS apps I build and publish on my own.</span></p>
+  </section>
+
+  <section class="apps">
+    <article class="app nsb">
+      <a href="./no-smoking-bank/"><img class="icon" src="./no-smoking-bank/img/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href="./no-smoking-bank/"><span class="ja">禁煙積立バンク</span><span class="en">NoSmokingBank</span></a></h2>
+        <p class="sub"><span class="ja">たばこ代を貯金と投資で見える化</span><span class="en">Quit smoking, grow savings</span></p>
+        <p class="desc">
+          <span class="ja">禁煙で浮いたたばこ代を毎日積み立て、もし投資に回していたらいくらになっていたかを同じグラフで確かめられます。値上げにも対応し、マイルストーンには通知でお知らせします。</span>
+          <span class="en">Bank the cigarette money you no longer spend, every single day, and see what it would be worth if you had invested it instead, right on the same chart.</span>
+        </p>
+        <p class="meta"><span class="ja">iPhone・iPad / 無料 / 日本語・英語</span><span class="en">iPhone and iPad / Free / English and Japanese</span></p>
+        <div class="links">
+          <a class="btn primary" href="./no-smoking-bank/"><span class="ja">紹介ページ</span><span class="en">Learn more</span></a>
+          <a class="btn" href="https://apps.apple.com/app/id6752426099">
+            <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            App Store
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="app identify">
+      <a href="./identify-app/"><img class="icon" src="./identify-app/img/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href="./identify-app/"><span class="ja">識別のアプリ</span><span class="en">Identify App</span></a></h2>
+        <p class="sub"><span class="ja">不思議のダンジョンのアイテム識別をサポート</span><span class="en">An item identification log for Mystery Dungeon</span></p>
+        <p class="desc">
+          <span class="ja">「風来のシレン」や「トルネコの大冒険」の “もっと不思議のダンジョン” を攻略するためのアプリです。識別したアイテムをチェックして、未識別のアイテムをひと目で絞り込めます。杖・壺の価格チャートや、おまじないの記録にも対応しています。</span>
+          <span class="en">A companion for the “Shiren the Wanderer” and “Torneko” Mystery Dungeon games. Check off the items you have identified and narrow down the unknown ones at a glance, with price charts for staffs and pots.</span>
+        </p>
+        <p class="meta"><span class="ja">iPhone・iPad / 無料 / 日本語</span><span class="en">iPhone and iPad / Free / Japanese only</span></p>
+        <div class="links">
+          <a class="btn primary" href="./identify-app/"><span class="ja">紹介ページ</span><span class="en">Learn more</span></a>
+          <a class="btn" href="https://apps.apple.com/jp/app/id1558625294">
+            <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            App Store
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <ul>
+      <li><a href="https://github.com/shinespark">GitHub</a></li>
+    </ul>
+    <p class="small">© 2026 SHINESPARK</p>
+  </div>
+</footer>
+<script>
+  // 禁煙積立バンクの紹介ページと同じ localStorage のキーを使い、選んだ言語をページ間で引き継ぐ
+  (function () {
+    var buttons = document.querySelectorAll('.langs button');
+    function apply(lang) {
+      document.documentElement.lang = lang;
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    apply(saved || ((navigator.language || 'ja').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en'));
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.lang); });
+    });
+  })();
+</script>
+</body>
+</html>
