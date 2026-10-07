@@ -194,24 +194,6 @@
     <p class="small">© 2026 SHINESPARK</p>
   </div>
 </footer>
-<script>
-  // 禁煙積立バンクの紹介ページと同じ localStorage のキーを使い、選んだ言語をページ間で引き継ぐ
-  (function () {
-    var buttons = document.querySelectorAll('.langs button');
-    function apply(lang) {
-      document.documentElement.lang = lang;
-      buttons.forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-      });
-      try { localStorage.setItem('lang', lang); } catch (e) {}
-    }
-    var saved = null;
-    try { saved = localStorage.getItem('lang'); } catch (e) {}
-    apply(saved || ((navigator.language || 'ja').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en'));
-    buttons.forEach(function (b) {
-      b.addEventListener('click', function () { apply(b.dataset.lang); });
-    });
-  })();
-</script>
+<script src="/assets/lang.js"></script>
 </body>
 </html>
