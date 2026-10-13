@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herdr Agents for Stream Deck</title>
+<meta name="description" content="A Stream Deck plugin that shows the state of your Herdr coding agents on the keys, and drives them without leaving the deck.">
+<link rel="icon" href="icon.png">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1d21;
+    --muted: #5b6470;
+    --line: #e3e6ea;
+    --card: #f6f7f9;
+    --accent: #0096ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --fg: #e8eaed;
+      --muted: #9aa3ad;
+      --line: #2a2e34;
+      --card: #1a1d21;
+      --accent: #3aaeff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 56px 16px 72px; }
+  header { display: flex; gap: 20px; align-items: center; margin-bottom: 28px; }
+  header img { width: 88px; height: 88px; border-radius: 20px; flex: none; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-size: 20px; margin: 44px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  p { margin: 0 0 14px; }
+  .lead { color: var(--muted); margin: 0; }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { white-space: nowrap; font-weight: 600; }
+  code { background: var(--card); padding: 1px 6px; border-radius: 4px; font-size: 14px; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin: 0; }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  ul { padding-left: 20px; margin: 0 0 14px; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 540px) {
+    header { flex-direction: column; align-items: flex-start; }
+    table, tbody, tr, th, td { display: block; }
+    tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    th, td { border: 0; padding: 2px 0; }
+    dl { grid-template-columns: 1fr; gap: 2px; }
+    dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon.png" alt="">
+    <div>
+      <h1>Herdr Agents for Stream Deck</h1>
+      <p class="lead">Show the state of your Herdr coding agents on the keys, and drive them without leaving the deck.</p>
+    </div>
+  </header>
+
+  <p>Herdr Agents is a plugin for the Elgato Stream Deck. It connects to <a href="https://herdr.dev">Herdr</a>, a terminal workspace for AI coding agents, and turns Stream Deck keys into a live view of those agents. Each key shows whether an agent is working, waiting for input or done, and a single press jumps to that agent or sends it a command.</p>
+  <p>It is downloadable desktop software that runs locally on the user's Mac.</p>
+
+  <h2>Actions</h2>
+  <table>
+    <tbody>
+      <tr><th>Agent Slot</th><td>Shows one agent's state, repository and branch. Press to focus its pane.</td></tr>
+      <tr><th>Agent Summary</th><td>Shows how many agents are in each state, and jumps to the agents that need attention. Can also be placed on the Stream Deck Neo Infobar.</td></tr>
+      <tr><th>New Tab</th><td>Opens a new Herdr tab.</td></tr>
+      <tr><th>Slash Command / Send Text</th><td>Sends a command or phrase to an agent.</td></tr>
+      <tr><th>Send Keys</th><td>Sends key presses such as <code>esc</code> to an agent.</td></tr>
+      <tr><th>Cycle</th><td>Steps through a list of values on each press, such as switching models.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Requirements</h2>
+  <ul>
+    <li>macOS</li>
+    <li>Stream Deck app</li>
+    <li>Herdr</li>
+  </ul>
+
+  <h2>Privacy</h2>
+  <p>The plugin does not collect, store or send any personal data. It runs entirely on the user's computer and only communicates with the Herdr application on the same machine through a local socket. There is no account, no analytics and no network connection to external servers.</p>
+
+  <h2>About</h2>
+  <dl>
+    <dt>Developer</dt><dd>shinespark (individual developer, Japan)</dd>
+    <dt>Distribution</dt><dd>Elgato Marketplace</dd>
+  </dl>
+
+  <footer>Not an official Herdr or Elgato product. Stream Deck is a trademark of Corsair Memory, Inc.</footer>
+</main>
+</body>
+</html>
