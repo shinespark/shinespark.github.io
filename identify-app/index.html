@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>識別のアプリ - 不思議のダンジョン攻略アプリ</title>
-<meta name="description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャートとおまじないの記録にも対応。">
+<meta name="description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャート、おまじないやシレン6 の装備品かけの記録にも対応。">
 <link rel="icon" href="./img/icon.png">
 <link rel="apple-touch-icon" href="./img/icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="識別のアプリ - 不思議のダンジョン攻略アプリ">
-<meta property="og:description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャートとおまじないの記録にも対応。">
+<meta property="og:description" content="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャート、おまじないやシレン6 の装備品かけの記録にも対応。">
 <meta property="og:image" content="https://shinespark.github.io/identify-app/img/ogp.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -92,8 +92,8 @@
   .req { color: var(--muted); font-size: 13px; margin-top: 12px; }
 
   .shots {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 22px; padding: 56px 0 8px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 18px; padding: 56px 0 8px;
   }
   .shots img {
     width: 100%; height: auto; display: block;
@@ -156,7 +156,7 @@
     <img class="icon" src="./img/icon.png" alt="">
     <h1>識別のアプリ</h1>
     <p class="sub">不思議のダンジョンのアイテム識別をサポート</p>
-    <p class="lede">「風来のシレン」や「トルネコの大冒険」の “もっと不思議のダンジョン” を攻略するためのアプリで、10 作品・15 ダンジョンに対応しています。識別したアイテムをチェックして、未識別のアイテムをひと目で絞り込めます。杖・壺の価格チャートや、おまじないの記録にも対応しています。</p>
+    <p class="lede">「風来のシレン」や「トルネコの大冒険」の “もっと不思議のダンジョン” を攻略するためのアプリで、10 作品・15 ダンジョンに対応しています。識別したアイテムをチェックして、未識別のアイテムをひと目で絞り込めます。杖・壺の価格チャートや、おまじない、シレン6 の装備品かけの記録にも対応しています。</p>
     <a class="cta" href="https://apps.apple.com/jp/app/id1558625294">
       <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
       App Store で見る
@@ -167,7 +167,8 @@
   <section class="wrap shots">
     <img src="./img/01-item-list.webp" width="600" height="1303" loading="lazy" alt="トルネコの大冒険・もっと不思議のダンジョンの識別アイテムリスト。上部のカードに識別率のリングと識別数 16 / 45、残り 29 種。未識別のアイテムが上にまとまっている。">
     <img src="./img/02-category.webp" width="600" height="1303" loading="lazy" alt="草・種のタブを開いた識別アイテムリスト。未識別 7 種の下に、識別済みの草・種がまとまっている。">
-    <img src="./img/03-dungeon-menu.webp" width="600" height="1303" loading="lazy" alt="画面いっぱいに開いたダンジョン選択。作品ごとにダンジョンが 1 行ずつ並び、選択中のダンジョンにチェックが付いている。">
+    <img src="./img/03-dungeon-menu.webp" width="600" height="1303" loading="lazy" alt="画面いっぱいに開いたダンジョン選択。作品名を見出しにダンジョンが 1 行ずつ並び、選択中のダンジョンにチェックが付いている。">
+    <img src="./img/04-equipment.webp" width="600" height="1303" loading="lazy" alt="風来のシレン6 の装備品かけタブ。武器ごとに通常・青・金の 3 つのチェックボックスが並び、上部のカードに飾った枠数 58 / 114 とあと 56 枠。">
   </section>
 
   <section class="wrap features">
@@ -185,8 +186,8 @@
       </div>
       <div class="card">
         <span class="dot"></span>
-        <h3>おまじないも記録</h3>
-        <p>シレン2 とシレンGB2 では、おまじないでもらえるアイテムもチェックできます。</p>
+        <h3>おまじないと装備品かけも記録</h3>
+        <p>シレン2 とシレンGB2 では、おまじないでもらえるアイテムをチェックできます。シレン6 では、装備品かけに飾った武器・盾を通常・青の神器・金の神器ごとにチェックでき、拾った装備品を持ち帰るべきか確かめられます。</p>
       </div>
       <div class="card">
         <span class="dot"></span>
