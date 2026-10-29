@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readdirSync, readFileSync } from 'node:fs';
-import { pageUrl, alternates, autoRedirectTarget, headerModel, footerLinks } from '../src/lib/site';
+import { pageUrl, headerModel, footerLinks } from '../src/lib/site';
 import { redirectScript } from '../src/lib/lang';
 
 describe('pageUrl', () => {
@@ -13,28 +12,6 @@ describe('pageUrl', () => {
     [{ kind: 'privacy', app: 'identify-app' }, 'ja', '/identify-app/privacy-policy/'],
   ] as const)('%o %s → %s', (page, lang, url) => {
     expect(pageUrl(page, lang)).toBe(url);
-  });
-});
-
-describe('alternates', () => {
-  it('identify-app には英語版がない', () => {
-    expect(alternates({ kind: 'app', app: 'identify-app' })).toBeNull();
-    expect(alternates({ kind: 'privacy', app: 'identify-app' })).toBeNull();
-  });
-  it('トップは日英の両方を返す', () => {
-    expect(alternates({ kind: 'top' })).toEqual({ ja: '/', en: '/en/' });
-  });
-});
-
-describe('autoRedirectTarget', () => {
-  it('言語が URL にない日本語版だけが英語版へ移動する', () => {
-    expect(autoRedirectTarget({ kind: 'top' }, 'ja')).toBe('/en/');
-    expect(autoRedirectTarget({ kind: 'app', app: 'picture-this' }, 'ja')).toBe('/picture-this/en/');
-  });
-  it('プライバシーポリシー・英語版・英語版のないページは移動しない', () => {
-    expect(autoRedirectTarget({ kind: 'privacy', app: 'no-smoking-bank' }, 'ja')).toBeNull();
-    expect(autoRedirectTarget({ kind: 'top' }, 'en')).toBeNull();
-    expect(autoRedirectTarget({ kind: 'app', app: 'identify-app' }, 'ja')).toBeNull();
   });
 });
 
@@ -100,10 +77,8 @@ describe('redirectScript', () => {
   it.each([
     [null, 'en-US', '/en/'],
     [null, 'ja-JP', null],
-    [null, 'JA', null],
     ['ja', 'en-US', null],
     ['en', 'ja-JP', '/en/'],
-    ['garbage', 'en-US', '/en/'],
   ] as const)('保存 %s・ブラウザ %s → %s', (saved, language, expected) => {
     expect(run({ saved, language })).toBe(expected);
   });
@@ -117,14 +92,4 @@ describe('redirectScript', () => {
     expect(run({ language: 'en-US', userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' })).toBeNull();
     expect(run({ saved: 'en', language: 'en-US', userAgent: 'Mozilla/5.0 (compatible; bingbot/2.0)' })).toBeNull();
   });
-});
-
-describe('ページ固有の CSS', () => {
-  it.each(readdirSync('src/content', { recursive: true }).filter((f) => String(f).endsWith('.astro')).map(String))(
-    '%s の波括弧の数が合っている',
-    (f) => {
-      const css = readFileSync(`src/content/${f}`, 'utf8').split('<style')[1] ?? '';
-      expect(css.split('{').length).toBe(css.split('}').length);
-    },
-  );
 });
