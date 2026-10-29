@@ -1,0 +1,16 @@
+{
+  "name": "shinespark.github.io",
+  "scripts": {
+    "test": "astro build && vitest run",
+    "dev": "astro dev",
+    "build": "astro build"
+  },
+  "type": "module",
+  "dependencies": {
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.5"
+  },
+  "private": true
+}
