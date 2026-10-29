@@ -100,3 +100,32 @@ describe('no-smoking-bank', () => {
     expect(html).not.toContain('ja-01-home.webp');
   });
 });
+
+describe('picture-this', () => {
+  const pages = [
+    'picture-this/index.html',
+    'picture-this/en/index.html',
+    'picture-this/privacy-policy/ja/index.html',
+    'picture-this/privacy-policy/en/index.html',
+  ];
+  it.each(pages)('%s に GA のタグと言語リンクがあり、問い合わせフォームへのリンクがない', (p) => {
+    const html = read(p);
+    expect(html).toContain('G-C90LV9QWZD');
+    expect(html).toContain('data-lang=');
+    expect(html).not.toContain('docs.google.com/forms');
+  });
+  it('プライバシーポリシーに問い合わせの節がない', () => {
+    expect(read('picture-this/privacy-policy/ja/index.html')).not.toMatch(/<h2[^>]*>問い合わせ<\/h2>/);
+    expect(read('picture-this/privacy-policy/en/index.html')).not.toMatch(/<h2[^>]*>Contact<\/h2>/);
+  });
+  it('日本語のアプリのページだけが自動移動の対象', () => {
+    expect(read('picture-this/index.html')).toContain('data-en-url="/picture-this/en/"');
+    expect(read('picture-this/privacy-policy/ja/index.html')).not.toContain('data-en-url');
+  });
+});
+
+describe('サイト全体', () => {
+  it('古い言語切り替えのスクリプトを配信しない', () => {
+    expect(exists('assets/lang.js')).toBe(false);
+  });
+});

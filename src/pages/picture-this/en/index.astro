@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Body from '../../../content/picture-this/Body.astro';
+---
+<BaseLayout
+  page={{ kind: 'app', app: 'picture-this' }}
+  lang="en"
+  title="Picture This – Copy Any Image"
+  description="A Chrome extension that copies any image you right-click to the clipboard as PNG, including CSS backgrounds, canvas, inline SVG and video posters. Recent copies stay in the popup, ready to copy again."
+  ogImage={{ url: 'https://shinespark.github.io/picture-this/img/icon.png' }}
+>
+  <Body lang="en" />
+</BaseLayout>
