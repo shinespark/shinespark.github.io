@@ -2,6 +2,7 @@
 import '../styles/base.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { redirectScript } from '../lib/lang';
 import { absoluteUrl, alternates, autoRedirectTarget, pageUrl, type Lang, type PageRef } from '../lib/site';
 
 interface Props {
@@ -18,10 +19,11 @@ const enUrl = autoRedirectTarget(page, lang);
 const favicon = page.kind === 'top' ? '/favicon.png' : `/${page.app}/img/icon.png`;
 ---
 <!DOCTYPE html>
-<html lang={lang} data-en-url={enUrl ?? undefined}>
+<html lang={lang}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{enUrl && <script is:inline set:html={redirectScript(enUrl)} />}
 <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-C90LV9QWZD"></script>
 <script is:inline>
   window.dataLayer = window.dataLayer || [];

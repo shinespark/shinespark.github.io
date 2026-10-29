@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
+import { readdirSync, readFileSync } from 'node:fs';
 import { pageUrl, alternates, autoRedirectTarget, headerModel, footerLinks } from '../src/lib/site';
-import { shouldRedirectToEn } from '../src/lib/lang';
+import { redirectScript } from '../src/lib/lang';
 
 describe('pageUrl', () => {
   it.each([
@@ -81,15 +82,49 @@ describe('footerLinks', () => {
   });
 });
 
-describe('shouldRedirectToEn', () => {
+describe('redirectScript', () => {
+  function run(opts: { saved?: string | null; language: string; userAgent?: string; storageThrows?: boolean; search?: string; hash?: string }) {
+    let replaced: string | null = null;
+    const localStorage = {
+      getItem: () => {
+        if (opts.storageThrows) throw new Error('blocked');
+        return opts.saved ?? null;
+      },
+    };
+    const navigator = { language: opts.language, userAgent: opts.userAgent ?? 'Mozilla/5.0' };
+    const location = { search: opts.search ?? '', hash: opts.hash ?? '', replace: (u: string) => { replaced = u; } };
+    new Function('localStorage', 'navigator', 'location', redirectScript('/en/'))(localStorage, navigator, location);
+    return replaced;
+  }
+
   it.each([
-    [null, 'en-US', true],
-    [null, 'ja-JP', false],
-    [null, 'JA', false],
-    ['ja', 'en-US', false],
-    ['en', 'ja-JP', true],
-    ['garbage', 'en-US', true],
-  ] as const)('保存 %s・ブラウザ %s → %s', (saved, browser, expected) => {
-    expect(shouldRedirectToEn(saved, browser)).toBe(expected);
+    [null, 'en-US', '/en/'],
+    [null, 'ja-JP', null],
+    [null, 'JA', null],
+    ['ja', 'en-US', null],
+    ['en', 'ja-JP', '/en/'],
+    ['garbage', 'en-US', '/en/'],
+  ] as const)('保存 %s・ブラウザ %s → %s', (saved, language, expected) => {
+    expect(run({ saved, language })).toBe(expected);
   });
+  it('localStorage が使えなくても例外を出さず、ブラウザの言語で判定する', () => {
+    expect(run({ language: 'en-US', storageThrows: true })).toBe('/en/');
+  });
+  it('クエリとハッシュを引き継ぐ', () => {
+    expect(run({ language: 'en-US', search: '?utm_source=x', hash: '#faq' })).toBe('/en/?utm_source=x#faq');
+  });
+  it('検索エンジンのクローラーは移動させない', () => {
+    expect(run({ language: 'en-US', userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' })).toBeNull();
+    expect(run({ saved: 'en', language: 'en-US', userAgent: 'Mozilla/5.0 (compatible; bingbot/2.0)' })).toBeNull();
+  });
+});
+
+describe('ページ固有の CSS', () => {
+  it.each(readdirSync('src/content', { recursive: true }).filter((f) => String(f).endsWith('.astro')).map(String))(
+    '%s の波括弧の数が合っている',
+    (f) => {
+      const css = readFileSync(`src/content/${f}`, 'utf8').split('<style')[1] ?? '';
+      expect(css.split('{').length).toBe(css.split('}').length);
+    },
+  );
 });
