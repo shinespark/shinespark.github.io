@@ -68,3 +68,35 @@ describe('identify-app', () => {
     expect(read('identify-app/index.html')).toMatch(/<footer[\s\S]*株式会社スパイク・チュンソフト様とは一切関係がありません[\s\S]*<\/footer>/);
   });
 });
+
+describe('no-smoking-bank', () => {
+  const pages = [
+    'no-smoking-bank/index.html',
+    'no-smoking-bank/en/index.html',
+    'no-smoking-bank/privacy-policy/ja/index.html',
+    'no-smoking-bank/privacy-policy/en/index.html',
+  ];
+  it.each(pages)('%s に GA のタグ・言語リンク・no-smoking-bank 専用のフォームがある', (p) => {
+    const html = read(p);
+    expect(html).toContain('G-C90LV9QWZD');
+    expect(html).toContain('data-lang=');
+    expect(html).toContain('1O_JKH8uG6Xcj0YK0Dyldgm1jr2FIXeTnW4S4r6BVZBk');
+  });
+  it('日本語のアプリのページだけが自動移動の対象', () => {
+    expect(read('no-smoking-bank/index.html')).toContain('data-en-url="/no-smoking-bank/en/"');
+    expect(read('no-smoking-bank/privacy-policy/ja/index.html')).not.toContain('data-en-url');
+  });
+  it('プライバシーポリシーの hreflang は今と同じ URL', () => {
+    const html = read('no-smoking-bank/privacy-policy/en/index.html');
+    expect(html).toContain('https://shinespark.github.io/no-smoking-bank/privacy-policy/ja/');
+    expect(html).toMatch(/<html[^>]*lang="en"/);
+  });
+  it('英語版のプライバシーポリシーのフッターから英語版のトップへ戻れる', () => {
+    expect(read('no-smoking-bank/privacy-policy/en/index.html')).toMatch(/<footer[\s\S]*href="\/en\/"[\s\S]*<\/footer>/);
+  });
+  it('英語版のアプリのページは英語のスクリーンショットだけを使う', () => {
+    const html = read('no-smoking-bank/en/index.html');
+    expect(html).toContain('/no-smoking-bank/img/en-01-home.webp');
+    expect(html).not.toContain('ja-01-home.webp');
+  });
+});
