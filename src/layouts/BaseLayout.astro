@@ -48,7 +48,7 @@ const favicon = page.kind === 'top' ? '/favicon.png' : `/${page.app}/img/icon.pn
 <body>
 <Header page={page} lang={lang} />
 <slot />
-<Footer page={page} lang={lang} />
+<Footer page={page} lang={lang}><slot name="footer-note" /></Footer>
 <script>
   import '../scripts/lang-client.ts';
 </script>

@@ -13,6 +13,7 @@ const links = footerLinks(Astro.props.page, Astro.props.lang);
     <ul>
       {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
     </ul>
+    <slot />
     <p class="small">© 2026 SHINESPARK</p>
   </div>
 </footer>

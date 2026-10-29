@@ -45,3 +45,26 @@ describe('トップページ', () => {
     expect(read('index.html')).toContain('herdr-streamdeck/icon.png');
   });
 });
+
+describe('identify-app', () => {
+  const pages = ['identify-app/index.html', 'identify-app/privacy-policy/index.html'];
+  it.each(pages)('%s に GA のタグがあり、言語リンク・hreflang・自動移動がない', (p) => {
+    const html = read(p);
+    expect(html).toContain('G-C90LV9QWZD');
+    expect(html).not.toContain('data-lang=');
+    expect(html).not.toContain('hreflang=');
+    expect(html).not.toContain('data-en-url');
+  });
+  it.each(pages)('%s のフッターにトップへのリンクと identify-app 専用のフォームがある', (p) => {
+    const html = read(p);
+    expect(html).toMatch(/<footer[\s\S]*href="\/"[\s\S]*<\/footer>/);
+    expect(html).toContain('1FAIpQLScOjpxN7rwKPgArAJ1ulaLDwoQ6MJKAzvvT1nytPRdNrWqAMw');
+    expect(html).not.toContain('1O_JKH8uG6Xcj0YK0Dyldgm1jr2FIXeTnW4S4r6BVZBk');
+  });
+  it('OGP 画像を今と同じ値で出す', () => {
+    expect(read('identify-app/index.html')).toContain('https://shinespark.github.io/identify-app/img/ogp.png');
+  });
+  it('フッターに非公式アプリである旨の注記を残す', () => {
+    expect(read('identify-app/index.html')).toMatch(/<footer[\s\S]*株式会社スパイク・チュンソフト様とは一切関係がありません[\s\S]*<\/footer>/);
+  });
+});

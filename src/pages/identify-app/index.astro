@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Body from '../../content/identify-app/Body.astro';
+---
+<BaseLayout
+  page={{ kind: 'app', app: 'identify-app' }}
+  lang="ja"
+  title="識別のアプリ - 不思議のダンジョン攻略アプリ"
+  description="風来のシレン・トルネコの大冒険の「もっと不思議のダンジョン」で、識別したアイテムをチェックして管理する iOS アプリ。杖・壺の価格チャート、おまじないやシレン6 の装備品かけの記録にも対応。"
+  ogImage={{
+    url: 'https://shinespark.github.io/identify-app/img/ogp.png',
+    width: 1200,
+    height: 630,
+    alt: '識別のアプリの識別アイテムリスト画面（トルネコの大冒険・もっと不思議のダンジョン）。識別したアイテムをチェックして、未識別のアイテムをひと目で。',
+  }}
+>
+  <Body />
+  <p class="small" slot="footer-note">本アプリは個人が開発した非公式アプリです。株式会社スパイク・チュンソフト様とは一切関係がありません。</p>
+</BaseLayout>
