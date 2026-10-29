@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Body from '../../../content/no-smoking-bank/Body.astro';
+---
+<BaseLayout
+  page={{ kind: 'app', app: 'no-smoking-bank' }}
+  lang="en"
+  title="NoSmokingBank"
+  description="An iOS app that banks the cigarette money you no longer spend, every day, and shows what it would be worth if you had invested it, on the same chart."
+  ogImage={{ url: 'https://shinespark.github.io/no-smoking-bank/img/ogp.png', width: 1200, height: 630, alt: 'NoSmokingBank home screen. What would your cigarette money be worth if you had invested it?' }}
+>
+  <Body lang="en" />
+</BaseLayout>

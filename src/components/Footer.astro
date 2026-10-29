@@ -1,0 +1,19 @@
+---
+import { footerLinks, type Lang, type PageRef } from '../lib/site';
+
+interface Props {
+  page: PageRef;
+  lang: Lang;
+}
+
+const links = footerLinks(Astro.props.page, Astro.props.lang);
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <ul>
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <slot />
+    <p class="small">© 2026 SHINESPARK</p>
+  </div>
+</footer>

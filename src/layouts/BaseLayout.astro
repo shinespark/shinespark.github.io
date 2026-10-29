@@ -1,0 +1,58 @@
+---
+import '../styles/base.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { redirectScript } from '../lib/lang';
+import { absoluteUrl, alternates, autoRedirectTarget, pageUrl, type Lang, type PageRef } from '../lib/site';
+
+interface Props {
+  page: PageRef;
+  lang: Lang;
+  title: string;
+  description: string;
+  ogImage?: { url: string; width?: number; height?: number; alt?: string };
+}
+
+const { page, lang, title, description, ogImage } = Astro.props;
+const alt = alternates(page);
+const enUrl = autoRedirectTarget(page, lang);
+const favicon = page.kind === 'top' ? '/favicon.png' : `/${page.app}/img/icon.png`;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{enUrl && <script is:inline set:html={redirectScript(enUrl)} />}
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-C90LV9QWZD"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C90LV9QWZD');
+</script>
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta property="og:type" content="website">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+{ogImage && <meta property="og:image" content={ogImage.url}>}
+{ogImage?.width && <meta property="og:image:width" content={String(ogImage.width)}>}
+{ogImage?.height && <meta property="og:image:height" content={String(ogImage.height)}>}
+{ogImage?.alt && <meta property="og:image:alt" content={ogImage.alt}>}
+<meta property="og:url" content={absoluteUrl(pageUrl(page, lang))}>
+<meta name="twitter:card" content={ogImage?.width ? 'summary_large_image' : 'summary'}>
+<link rel="icon" href={favicon}>
+<link rel="apple-touch-icon" href={favicon}>
+{alt && <link rel="alternate" hreflang="ja" href={absoluteUrl(alt.ja)}>}
+{alt && <link rel="alternate" hreflang="en" href={absoluteUrl(alt.en)}>}
+</head>
+<body>
+<Header page={page} lang={lang} />
+<slot />
+<Footer page={page} lang={lang}><slot name="footer-note" /></Footer>
+<script>
+  import '../scripts/lang-client.ts';
+</script>
+</body>
+</html>

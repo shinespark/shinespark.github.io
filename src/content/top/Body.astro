@@ -1,0 +1,133 @@
+---
+import AppleLogo from '../../components/AppleLogo.astro';
+import { pageUrl, type Lang } from '../../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const ja = lang === 'ja';
+const nsbUrl = pageUrl({ kind: 'app', app: 'no-smoking-bank' }, lang);
+const ptUrl = pageUrl({ kind: 'app', app: 'picture-this' }, lang);
+const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-fa67-44a8-80ff-1292674a0771';
+---
+<main class="wrap">
+  <section class="hero">
+    <h1>{ja ? 'つくったアプリ' : 'Apps'}</h1>
+    <p>{ja ? '個人で開発・配信している iOS アプリ、Stream Deck プラグイン、Chrome 拡張です。' : 'iOS apps, a Stream Deck plugin and a Chrome extension I build and publish on my own.'}</p>
+  </section>
+
+  <section class="apps">
+    <article class="app identify">
+      <a href="/identify-app/"><img class="icon" src="/identify-app/img/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href="/identify-app/">{ja ? '識別のアプリ' : 'Identify App'}</a></h2>
+        <p class="sub">{ja ? '不思議のダンジョンのアイテム識別をサポート' : 'An item identification log for Mystery Dungeon'}</p>
+        <p class="desc">{ja
+          ? '「風来のシレン」や「トルネコの大冒険」の “もっと不思議のダンジョン” を攻略するためのアプリです。識別したアイテムをチェックして、未識別のアイテムをひと目で絞り込めます。杖・壺の価格チャートや、おまじないの記録にも対応しています。'
+          : 'A companion for the “Shiren the Wanderer” and “Torneko” Mystery Dungeon games. Check off the items you have identified and narrow down the unknown ones at a glance, with price charts for staffs and pots.'}</p>
+        <p class="meta">{ja ? 'iPhone・iPad / 無料 / 日本語' : 'iPhone and iPad / Free / Japanese only'}</p>
+        <div class="links">
+          <a class="btn primary" href="/identify-app/">{ja ? '紹介ページ' : 'Learn more'}</a>
+          <a class="btn" href="https://apps.apple.com/jp/app/id1558625294"><AppleLogo />App Store</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="app nsb">
+      <a href={nsbUrl}><img class="icon" src="/no-smoking-bank/img/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href={nsbUrl}>{ja ? '禁煙積立バンク' : 'NoSmokingBank'}</a></h2>
+        <p class="sub">{ja ? 'たばこ代を貯金と投資で見える化' : 'Quit smoking, grow savings'}</p>
+        <p class="desc">{ja
+          ? '禁煙で浮いたたばこ代を毎日積み立て、もし投資に回していたらいくらになっていたかを同じグラフで確かめられます。値上げにも対応し、マイルストーンには通知でお知らせします。'
+          : 'Bank the cigarette money you no longer spend, every single day, and see what it would be worth if you had invested it instead, right on the same chart.'}</p>
+        <p class="meta">{ja ? 'iPhone・iPad / 無料 / 日本語・英語' : 'iPhone and iPad / Free / English and Japanese'}</p>
+        <div class="links">
+          <a class="btn primary" href={nsbUrl}>{ja ? '紹介ページ' : 'Learn more'}</a>
+          <a class="btn" href="https://apps.apple.com/app/id6752426099"><AppleLogo />App Store</a>
+        </div>
+      </div>
+    </article>
+    <article class="app herdr">
+      <a href={herdrUrl}><img class="icon" src="/herdr-streamdeck/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href={herdrUrl}>Herdr Agents for Stream Deck</a></h2>
+        <p class="sub">{ja ? 'AI コーディングエージェントの状態を Stream Deck に表示' : 'Your coding agents, on the Stream Deck keys'}</p>
+        <p class="desc">{ja
+          ? 'AI コーディングエージェント用のターミナルワークスペース「Herdr」とつながる Stream Deck プラグインです。各キーにエージェントが作業中・入力待ち・完了のどれかを表示し、押すとそのエージェントへ移動したり、コマンドを送ったりできます。'
+          : 'A Stream Deck plugin for Herdr, a terminal workspace for AI coding agents. Each key shows whether an agent is working, waiting for input or done, and a single press jumps to that agent or sends it a command.'}</p>
+        <p class="meta">{ja ? 'macOS / Stream Deck プラグイン / 日本語・英語' : 'macOS / Stream Deck plugin / English and Japanese'}</p>
+        <div class="links">
+          <a class="btn primary" href={herdrUrl}>Elgato Marketplace</a>
+        </div>
+      </div>
+    </article>
+    <article class="app picture-this">
+      <a href={ptUrl}><img class="icon" src="/picture-this/img/icon.png" width="96" height="96" alt=""></a>
+      <div>
+        <h2><a href={ptUrl}>Picture This – Copy Any Image</a></h2>
+        <p class="sub">{ja ? 'どんな画像も PNG でクリップボードへ' : 'Copy any image as PNG'}</p>
+        <p class="desc">{ja
+          ? '右クリックした画像を PNG にしてクリップボードへコピーする Chrome 拡張です。CSS の背景画像・canvas・インライン SVG・動画のポスター画像にも対応し、直近のコピーはポップアップから貼り直せます。'
+          : 'A Chrome extension that copies any image you right-click to the clipboard as PNG, including CSS backgrounds, canvas, inline SVG and video posters. Recent copies stay in the popup, ready to copy again.'}</p>
+        <p class="meta">{ja ? 'Google Chrome / 拡張機能 / 日本語・英語' : 'Google Chrome / Extension / English and Japanese'}</p>
+        <div class="links">
+          <a class="btn primary" href={ptUrl}>{ja ? '紹介ページ' : 'Learn more'}</a>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<style is:global>
+
+  .hero { padding: 64px 0 8px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 40px); line-height: 1.3; margin: 0; letter-spacing: -.02em; }
+  .hero p { color: var(--muted); margin: 10px 0 0; }
+
+  .apps { padding: 40px 0 72px; display: grid; gap: 20px; }
+  .app {
+    display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .app .icon { width: 96px; height: 96px; border-radius: 22px; display: block; }
+  .app h2 { font-size: 22px; line-height: 1.35; margin: 0; letter-spacing: -.01em; }
+  .app h2 a { color: inherit; text-decoration: none; }
+  .app h2 a:hover { text-decoration: underline; }
+  .app .sub { font-weight: 600; font-size: 15px; margin: 2px 0 0; }
+  .app .desc { color: var(--muted); font-size: 15.5px; line-height: 1.7; margin: 10px 0 0; }
+  .app .meta { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+  .app .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 999px; text-decoration: none;
+    font-size: 14.5px; font-weight: 600; line-height: 1.2;
+    border: 1px solid var(--line); color: var(--ink);
+  }
+  .btn.primary { border-color: transparent; color: #fff; }
+  .btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* アプリごとの色は各紹介ページの配色に揃える */
+  .nsb .sub { color: #0a7cff; }
+  .nsb .btn.primary { background: linear-gradient(120deg, #22c7f0, #0a7cff); }
+  .identify .sub { color: #00897b; }
+  .identify .btn.primary { background: linear-gradient(120deg, #4ccfb0, #00897b); }
+  .herdr .sub { color: #0096ff; }
+  .herdr .btn.primary { background: linear-gradient(120deg, #3aaeff, #0072d6); }
+  .picture-this .sub { color: #2f7fbf; }
+  .picture-this .btn.primary { background: linear-gradient(120deg, #4ea8de, #24406b); }
+  @media (prefers-color-scheme: dark) {
+    .nsb .sub { color: #4da3ff; }
+    .identify .sub { color: #4dcdb0; }
+    .herdr .sub { color: #3aaeff; }
+    .picture-this .sub { color: #6cb8e8; }
+  }
+
+  @media (max-width: 560px) {
+    .app { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+    .app .icon { width: 72px; height: 72px; border-radius: 17px; }
+  }
+</style>

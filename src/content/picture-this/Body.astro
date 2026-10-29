@@ -1,0 +1,180 @@
+---
+import type { Lang } from '../../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const ja = Astro.props.lang === 'ja';
+---
+<main>
+  <section class="wrap hero">
+    <img class="icon" src="/picture-this/img/icon.png" width="116" height="116" alt="">
+    <h1>Picture This</h1>
+    <p class="sub">{ja ? <Fragment>どんな画像も PNG でクリップボードへ</Fragment> : <Fragment>Copy any image as PNG</Fragment>}</p>
+    <p class="lede">
+      {ja ? <Fragment>ページ上の画像を右クリックして、PNG としてクリップボードにコピーする Chrome 拡張です。ブラウザ標準の「画像をコピー」では拾えない画像も取得でき、貼り付け先のアプリが受け付ける形式で必ずコピーします。</Fragment> : <Fragment>A Chrome extension that copies any image you right-click to the clipboard as PNG. It picks up images that the browser's built-in “Copy image” can't reach, and always copies them in a format that apps can paste.</Fragment>}
+    </p>
+    <p class="req">{ja ? <Fragment>Google Chrome 拡張機能 / 無料 / 日本語・英語</Fragment> : <Fragment>Google Chrome extension / Free / English and Japanese</Fragment>}</p>
+  </section>
+
+  <section class="wrap features">
+    <h2>{ja ? <Fragment>できること</Fragment> : <Fragment>Features</Fragment>}</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>&lt;img&gt; 以外の画像にも対応</Fragment> : <Fragment>Works on more than &lt;img&gt;</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>CSS の背景画像（::before / ::after を含む）、&lt;canvas&gt;、インライン SVG、&lt;video&gt; のポスター画像もコピーできます。iframe の中の画像にも対応しています。</Fragment> : <Fragment>CSS background images (including ::before / ::after), &lt;canvas&gt;, inline SVG and &lt;video&gt; poster images can all be copied, including images inside iframes.</Fragment>}
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>常に PNG でコピー</Fragment> : <Fragment>Always PNG</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>WebP・AVIF・SVG などは PNG に変換してからコピーするので、貼り付け先のアプリを選びません。</Fragment> : <Fragment>WebP, AVIF, SVG and other formats are converted to PNG before copying, so they paste into any app.</Fragment>}
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>取得できるサイトが多い</Fragment> : <Fragment>Works on more sites</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>画像は拡張機能自身がダウンロードするため、他オリジンからの読み込みを制限しているサイトでもコピーできます。</Fragment> : <Fragment>Images are downloaded by the extension itself, so sites that block cross-origin requests still work.</Fragment>}
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>直近のコピーをポップアップから</Fragment> : <Fragment>Recent copies in the popup</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>ツールバーのアイコンから直近のコピーを一覧できます。サムネイルのクリックで再コピーでき、コピー元のページを開いたり、削除したりもできます。</Fragment> : <Fragment>Click the toolbar icon to see your recent copies. Click a thumbnail to copy it again, open the page it came from, or delete it.</Fragment>}
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>元のファイルのまま保存</Fragment> : <Fragment>Save the original file</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>「元の画像を保存」を選ぶと変換せずにダウンロードするので、アニメーション GIF・APNG・WebP もそのまま残せます。</Fragment> : <Fragment>“Save original image” downloads the image without converting it, so animated GIF, APNG and WebP keep their animation.</Fragment>}
+        </p>
+      </div>
+      <div class="card">
+        <span class="dot"></span>
+        <h3>{ja ? <Fragment>データは端末の外に出ない</Fragment> : <Fragment>Nothing leaves your device</Fragment>}</h3>
+        <p>
+          {ja ? <Fragment>履歴はブラウザ内にのみ保存され、開発者や第三者に送信されることはありません。解析・トラッキング・広告も含みません。</Fragment> : <Fragment>The history is stored only in your browser and is never sent to the developer or anyone else. No analytics, tracking or ads.</Fragment>}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap howto">
+    <h2>{ja ? <Fragment>使い方</Fragment> : <Fragment>How to use</Fragment>}</h2>
+    <ol class="steps">
+      <li>{ja ? <Fragment>画像を右クリックして「画像をクリップボードにコピー」を選ぶ</Fragment> : <Fragment>Right-click an image and choose “Copy image to clipboard”</Fragment>}</li>
+      <li>{ja ? <Fragment>好きな場所に貼り付ける</Fragment> : <Fragment>Paste it anywhere</Fragment>}</li>
+      <li>{ja ? <Fragment>アニメーションを残したいときは「元の画像を保存」を選ぶ</Fragment> : <Fragment>To keep an animation, choose “Save original image” instead</Fragment>}</li>
+      <li>{ja ? <Fragment>直近の画像をもう一度コピーするときは、ツールバーのアイコンを押してサムネイルをクリック</Fragment> : <Fragment>To copy a recent image again, click the toolbar icon and click its thumbnail</Fragment>}</li>
+    </ol>
+    <ul class="notes">
+      <li>{ja ? <Fragment>アニメーション画像は 1 コマ目の静止画としてコピーされます。アニメーションを残すには「元の画像を保存」を使ってください。</Fragment> : <Fragment>Animated images are copied as their first frame. Use “Save original image” to keep the animation.</Fragment>}</li>
+      <li>{ja ? <Fragment>約 2MB を超える画像はコピーはしますが、履歴には残りません。</Fragment> : <Fragment>Images larger than about 2 MB are copied but not kept in the history.</Fragment>}</li>
+    </ul>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <p>
+        {ja ? <Fragment>右クリックでコピーできない画像を、<br>もうあきらめなくていい。</Fragment> : <Fragment>That image you couldn't copy?<br>Right-click it again.</Fragment>}
+      </p>
+    </div>
+  </section>
+</main>
+
+<style is:global>
+  :root {
+    --sky: #4ea8de;
+    --navy: #24406b;
+    --ink: #16171a;
+    --muted: #6b6d75;
+    --bg: #ffffff;
+    --bg-alt: #f5f6f8;
+    --line: #e4e6ea;
+    --card: #ffffff;
+    --link: #2f7fbf;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --navy: #7fb6e6;
+      --ink: #f2f3f5;
+      --muted: #9b9ea6;
+      --bg: #0f1013;
+      --bg-alt: #17191d;
+      --line: #2a2d33;
+      --card: #17191d;
+      --link: #6cb8e8;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  .hero { padding: 72px 0 8px; text-align: center; }
+  .hero .icon { width: 116px; height: 116px; }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 46px); line-height: 1.25;
+    margin: 26px 0 6px; letter-spacing: -.02em;
+  }
+  .hero .sub {
+    font-size: clamp(17px, 2.4vw, 20px); font-weight: 600; margin: 0;
+    background: linear-gradient(90deg, var(--sky), var(--navy));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lede { color: var(--muted); max-width: 34em; margin: 18px auto 0; text-align: left; }
+  .req { color: var(--muted); font-size: 13px; margin-top: 18px; }
+
+  section.features, section.howto { padding: 64px 0 0; }
+  h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 26px;
+  }
+  /* 和文は字面が広く、欧文向けのトラッキングだと間延びする */
+  html[lang="ja"] h2 { letter-spacing: .06em; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px 26px 28px;
+  }
+  .card h3 { font-size: 18px; margin: 0 0 8px; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+  .card .dot {
+    display: block; width: 30px; height: 4px; border-radius: 2px; margin-bottom: 18px;
+    background: linear-gradient(90deg, var(--sky), var(--navy));
+  }
+
+  .steps { margin: 0; padding-left: 1.4em; }
+  .steps li { margin-bottom: 8px; }
+  .notes { color: var(--muted); font-size: 15px; margin: 26px 0 0; padding-left: 1.4em; }
+  .notes li { margin-bottom: 4px; }
+
+  .closing {
+    background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 64px 0; margin-top: 72px; text-align: center;
+  }
+  .closing p { font-size: clamp(21px, 3.4vw, 27px); font-weight: 700; margin: 0; letter-spacing: -.01em; }
+
+
+</style>

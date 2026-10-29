@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Body from '../../content/no-smoking-bank/Body.astro';
+---
+<BaseLayout
+  page={{ kind: 'app', app: 'no-smoking-bank' }}
+  lang="ja"
+  title="禁煙積立バンク / NoSmokingBank"
+  description="禁煙で浮いたたばこ代を毎日積み立て、投資に回していたらいくらになっていたかを同じグラフで見せる iOS アプリ。"
+  ogImage={{ url: 'https://shinespark.github.io/no-smoking-bank/img/ogp.png', width: 1200, height: 630, alt: '禁煙積立バンクのホーム画面。浮いたたばこ代、投資してたらいくらになる？' }}
+>
+  <Body lang="ja" />
+</BaseLayout>

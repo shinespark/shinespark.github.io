@@ -1,0 +1,22 @@
+---
+import { headerModel, type Lang, type PageRef } from '../lib/site';
+
+interface Props {
+  page: PageRef;
+  lang: Lang;
+}
+
+const { home, switchTo } = headerModel(Astro.props.page, Astro.props.lang);
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="home" href={home.href}>
+      {home.icon && <img src={home.icon} width="32" height="32" alt="" />}
+      <b>{home.label}</b>
+    </a>
+    <span class="spacer"></span>
+    {switchTo && (
+      <a class="lang" href={switchTo.href} hreflang={switchTo.lang} lang={switchTo.lang} data-lang={switchTo.lang}>{switchTo.label}</a>
+    )}
+  </div>
+</header>
