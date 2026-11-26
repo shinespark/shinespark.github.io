@@ -1,10 +1,11 @@
 export type Lang = 'ja' | 'en';
-export type AppId = 'identify-app' | 'no-smoking-bank' | 'picture-this';
+export type AppId = 'identify-app' | 'no-smoking-bank' | 'picture-this' | 'domain-hopper';
 
 export interface App {
   id: AppId;
   name: { ja: string; en?: string };
   hasEnglish: boolean;
+  hasAppPage?: false;
   appStore?: string;
   contact?: string;
 }
@@ -28,6 +29,12 @@ export const apps: Record<AppId, App> = {
     id: 'picture-this',
     name: { ja: 'Picture This', en: 'Picture This' },
     hasEnglish: true,
+  },
+  'domain-hopper': {
+    id: 'domain-hopper',
+    name: { ja: 'Domain Hopper', en: 'Domain Hopper' },
+    hasEnglish: true,
+    hasAppPage: false,
   },
 };
 
@@ -80,7 +87,7 @@ export function headerModel(page: PageRef, lang: Lang): HeaderModel {
     page.kind === 'top'
       ? { href: pageUrl(page, lang), label: 'SHINESPARK' }
       : {
-          href: pageUrl({ kind: 'app', app: page.app }, lang),
+          href: pageUrl(apps[page.app].hasAppPage === false ? { kind: 'top' } : { kind: 'app', app: page.app }, lang),
           label: appName(apps[page.app], lang),
           icon: `/${page.app}/img/icon.png`,
         };
@@ -107,7 +114,7 @@ export function footerLinks(page: PageRef, lang: Lang): FooterLink[] {
   if (page.kind !== 'top') {
     const app = apps[page.app];
     if (app.appStore) links.push({ href: app.appStore, label: 'App Store' });
-    if (page.kind !== 'app') links.push({ href: pageUrl({ kind: 'app', app: app.id }, lang), label: appName(app, lang) });
+    if (page.kind !== 'app' && app.hasAppPage !== false) links.push({ href: pageUrl({ kind: 'app', app: app.id }, lang), label: appName(app, lang) });
     if (page.kind !== 'privacy') links.push({ href: pageUrl({ kind: 'privacy', app: app.id }, lang), label: t.privacy });
     if (app.contact) links.push({ href: app.contact, label: t.contact });
     links.push({ href: pageUrl({ kind: 'top' }, lang), label: t.more });
