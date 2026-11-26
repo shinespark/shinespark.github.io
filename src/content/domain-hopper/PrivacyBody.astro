@@ -1,0 +1,112 @@
+---
+import type { Lang } from '../../lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const ja = Astro.props.lang === 'ja';
+const contact = 'https://github.com/shinespark/domain-hopper/issues';
+---
+{ja ? <Fragment>
+<main class="wrap narrow">
+<h1>プライバシーポリシー</h1>
+<p class="updated">最終更新日: 2026年11月26日</p>
+
+<p>Domain Hopper は、データを収集・送信・共有しません。通信は一切行わず、解析やエラー送信のコードも含まれていません。</p>
+
+<h2>読み取るデータ</h2>
+<ul>
+  <li>ツールバーのボタンを押した時点での今のタブの URL だけです（<code>activeTab</code> 権限を使います）。切り替え先を決めるために使い、登録しない限り保存しません。</li>
+</ul>
+
+<h2>保存するデータ</h2>
+<ul>
+  <li>登録した origin・ラベル・プロジェクト名を <code>chrome.storage.sync</code> に保存します。Chrome の同期をオンにしている場合は、この保存先が Chrome によって利用者の Google アカウントに同期され、ほかの Chrome でも使えるようになります。オフの場合はこの端末内にだけ保存されます。開発者がこのデータを見ることはできません。</li>
+</ul>
+
+<h2>送信しないこと</h2>
+<ul>
+  <li>開発者や第三者には何も送信しません。ページの URL・内容・閲覧履歴がアップロードされることはありません。</li>
+</ul>
+
+<p>データを消したいときは、設定ページでプロジェクトを削除してください。拡張機能をアンインストールすると、この端末に保存されたデータは削除されます。同期済みのコピーは Chrome の同期の動作に従います。</p>
+
+<h2>連絡先</h2>
+<p><a href={contact}>{contact}</a></p>
+
+</main>
+</Fragment> : <Fragment>
+<main class="wrap narrow">
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: November 26, 2026</p>
+
+<p>Domain Hopper does not collect, transmit or share any data. It makes no network requests and contains no analytics or error-reporting code.</p>
+
+<h2>Data read</h2>
+<ul>
+  <li>The URL of the current tab, only at the moment you press the toolbar button (using the <code>activeTab</code> permission). It is used to work out the target address and is not stored unless you register it.</li>
+</ul>
+
+<h2>Data stored</h2>
+<ul>
+  <li>The origins, labels and project names you register, saved in <code>chrome.storage.sync</code>. If you have turned on Chrome sync, Chrome syncs this storage to your Google account so it is available in your other Chrome browsers; otherwise it stays on this device only. The developer cannot access it.</li>
+</ul>
+
+<h2>Data not sent</h2>
+<ul>
+  <li>Nothing is sent to the developer or any third party. Page URLs, page content and browsing history are never uploaded.</li>
+</ul>
+
+<p>To remove your data, delete projects on the settings page. Uninstalling the extension removes the data stored on this device; synced copies follow Chrome&#x27;s sync behavior.</p>
+
+<h2>Contact</h2>
+<p><a href={contact}>{contact}</a></p>
+
+</main>
+</Fragment>}
+
+<style is:global>
+  :root {
+    --ink: #16171a;
+    --muted: #6b6d75;
+    --bg: #ffffff;
+    --line: #e4e6ea;
+    --link: #2f7fbf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f2f3f5;
+      --muted: #9b9ea6;
+      --bg: #0f1013;
+      --line: #2a2d33;
+      --link: #6cb8e8;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); overflow-wrap: anywhere; }
+  code { font-size: .92em; }
+
+
+  main { padding: 48px 0 24px; }
+  h1 { font-size: clamp(28px, 5vw, 36px); line-height: 1.3; margin: 0 0 6px; letter-spacing: -.01em; }
+  .updated { color: var(--muted); font-size: 14px; margin: 0 0 32px; }
+  h2 { font-size: 19px; margin: 40px 0 10px; padding-top: 28px; border-top: 1px solid var(--line); }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 1.4em; }
+  li { margin-bottom: 4px; }
+
+
+  .narrow { max-width: 760px; }
+</style>

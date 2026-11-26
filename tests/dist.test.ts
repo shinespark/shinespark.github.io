@@ -19,6 +19,8 @@ describe('配信 URL', () => {
     'picture-this/en/index.html',
     'picture-this/privacy-policy/ja/index.html',
     'picture-this/privacy-policy/en/index.html',
+    'domain-hopper/privacy-policy/ja/index.html',
+    'domain-hopper/privacy-policy/en/index.html',
   ])('%s が今と同じ URL で配信される', (p) => {
     expect(exists(p)).toBe(true);
   });
