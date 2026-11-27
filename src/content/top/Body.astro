@@ -10,7 +10,6 @@ const { lang } = Astro.props;
 const ja = lang === 'ja';
 const nsbUrl = pageUrl({ kind: 'app', app: 'no-smoking-bank' }, lang);
 const ptUrl = pageUrl({ kind: 'app', app: 'picture-this' }, lang);
-const dhPrivacyUrl = pageUrl({ kind: 'privacy', app: 'domain-hopper' }, lang);
 const dhStoreUrl = 'https://chromewebstore.google.com/detail/domain-hopper/gdpimjllcckfpipkblfoknlmflinmboh';
 const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-fa67-44a8-80ff-1292674a0771';
 ---
@@ -91,7 +90,6 @@ const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-f
         <p class="meta">{ja ? 'Google Chrome / 拡張機能 / 日本語・英語' : 'Google Chrome / Extension / English and Japanese'}</p>
         <div class="links">
           <a class="btn primary" href={dhStoreUrl}>{ja ? 'Chrome ウェブストア' : 'Chrome Web Store'}</a>
-          <a class="btn" href={dhPrivacyUrl}>{ja ? 'プライバシーポリシー' : 'Privacy Policy'}</a>
         </div>
       </div>
     </article>
