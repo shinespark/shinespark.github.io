@@ -9,8 +9,10 @@ interface Props {
 const { lang } = Astro.props;
 const ja = lang === 'ja';
 const nsbUrl = pageUrl({ kind: 'app', app: 'no-smoking-bank' }, lang);
-const ptUrl = pageUrl({ kind: 'app', app: 'picture-this' }, lang);
+const ptStoreUrl = 'https://chromewebstore.google.com/detail/lgbkhnlbpbljgdomolpecmmjabodppco';
+const ptPrivacyUrl = pageUrl({ kind: 'privacy', app: 'picture-this' }, lang);
 const dhStoreUrl = 'https://chromewebstore.google.com/detail/domain-hopper/gdpimjllcckfpipkblfoknlmflinmboh';
+const dhPrivacyUrl = pageUrl({ kind: 'privacy', app: 'domain-hopper' }, lang);
 const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-fa67-44a8-80ff-1292674a0771';
 ---
 <main class="wrap">
@@ -66,16 +68,17 @@ const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-f
       </div>
     </article>
     <article class="app picture-this">
-      <a href={ptUrl}><img class="icon" src="/picture-this/img/icon.png" width="96" height="96" alt=""></a>
+      <a href={ptStoreUrl}><img class="icon" src="/picture-this/img/icon.png" width="96" height="96" alt=""></a>
       <div>
-        <h2><a href={ptUrl}>Picture This – Copy Any Image</a></h2>
+        <h2><a href={ptStoreUrl}>Picture This – Copy Any Image</a></h2>
         <p class="sub">{ja ? 'どんな画像も PNG でクリップボードへ' : 'Copy any image as PNG'}</p>
         <p class="desc">{ja
           ? '右クリックした画像を PNG にしてクリップボードへコピーする Chrome 拡張です。CSS の背景画像・canvas・インライン SVG・動画のポスター画像にも対応し、直近のコピーはポップアップから貼り直せます。'
           : 'A Chrome extension that copies any image you right-click to the clipboard as PNG, including CSS backgrounds, canvas, inline SVG and video posters. Recent copies stay in the popup, ready to copy again.'}</p>
         <p class="meta">{ja ? 'Google Chrome / 拡張機能 / 日本語・英語' : 'Google Chrome / Extension / English and Japanese'}</p>
         <div class="links">
-          <a class="btn primary" href={ptUrl}>{ja ? '紹介ページ' : 'Learn more'}</a>
+          <a class="btn primary" href={ptStoreUrl}>{ja ? 'Chrome ウェブストア' : 'Chrome Web Store'}</a>
+          <a class="btn" href={ptPrivacyUrl}>{ja ? 'プライバシーポリシー' : 'Privacy Policy'}</a>
         </div>
       </div>
     </article>
@@ -90,6 +93,7 @@ const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-f
         <p class="meta">{ja ? 'Google Chrome / 拡張機能 / 日本語・英語' : 'Google Chrome / Extension / English and Japanese'}</p>
         <div class="links">
           <a class="btn primary" href={dhStoreUrl}>{ja ? 'Chrome ウェブストア' : 'Chrome Web Store'}</a>
+          <a class="btn" href={dhPrivacyUrl}>{ja ? 'プライバシーポリシー' : 'Privacy Policy'}</a>
         </div>
       </div>
     </article>

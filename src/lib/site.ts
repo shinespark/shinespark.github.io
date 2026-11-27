@@ -29,6 +29,7 @@ export const apps: Record<AppId, App> = {
     id: 'picture-this',
     name: { ja: 'Picture This', en: 'Picture This' },
     hasEnglish: true,
+    hasAppPage: false,
   },
   'domain-hopper': {
     id: 'domain-hopper',

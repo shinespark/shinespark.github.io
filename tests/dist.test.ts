@@ -15,8 +15,6 @@ describe('配信 URL', () => {
     'no-smoking-bank/en/index.html',
     'no-smoking-bank/privacy-policy/ja/index.html',
     'no-smoking-bank/privacy-policy/en/index.html',
-    'picture-this/index.html',
-    'picture-this/en/index.html',
     'picture-this/privacy-policy/ja/index.html',
     'picture-this/privacy-policy/en/index.html',
     'domain-hopper/privacy-policy/ja/index.html',
