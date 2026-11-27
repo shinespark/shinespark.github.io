@@ -11,7 +11,7 @@ const ja = lang === 'ja';
 const nsbUrl = pageUrl({ kind: 'app', app: 'no-smoking-bank' }, lang);
 const ptUrl = pageUrl({ kind: 'app', app: 'picture-this' }, lang);
 const dhPrivacyUrl = pageUrl({ kind: 'privacy', app: 'domain-hopper' }, lang);
-const dhRepoUrl = 'https://github.com/shinespark/domain-hopper';
+const dhStoreUrl = 'https://chromewebstore.google.com/detail/domain-hopper/gdpimjllcckfpipkblfoknlmflinmboh';
 const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-fa67-44a8-80ff-1292674a0771';
 ---
 <main class="wrap">
@@ -81,16 +81,16 @@ const herdrUrl = 'https://marketplace.elgato.com/product/herdr-agents-f685015b-f
       </div>
     </article>
     <article class="app domain-hopper">
-      <a href={dhRepoUrl}><img class="icon" src="/domain-hopper/img/icon.png" width="96" height="96" alt=""></a>
+      <a href={dhStoreUrl}><img class="icon" src="/domain-hopper/img/icon.png" width="96" height="96" alt=""></a>
       <div>
-        <h2><a href={dhRepoUrl}>Domain Hopper</a></h2>
+        <h2><a href={dhStoreUrl}>Domain Hopper</a></h2>
         <p class="sub">{ja ? '同じパスのまま別の環境へ切り替え' : 'Hop between environments, same path'}</p>
         <p class="desc">{ja
           ? '開いているタブを、パス・クエリ・ハッシュはそのままで同じサイトの別の環境（本番・ステージング・ローカルなど）に切り替える Chrome 拡張です。Cmd/Ctrl を押しながらクリックすると、今のタブの右隣に開きます。通信は一切行いません。'
           : 'A Chrome extension that switches the tab you are on to another environment of the same site (production, staging, local), keeping the path, query and hash. Cmd/Ctrl-click opens it in a new tab next to the current one. It makes no network requests.'}</p>
         <p class="meta">{ja ? 'Google Chrome / 拡張機能 / 日本語・英語' : 'Google Chrome / Extension / English and Japanese'}</p>
         <div class="links">
-          <a class="btn primary" href={dhRepoUrl}>GitHub</a>
+          <a class="btn primary" href={dhStoreUrl}>{ja ? 'Chrome ウェブストア' : 'Chrome Web Store'}</a>
           <a class="btn" href={dhPrivacyUrl}>{ja ? 'プライバシーポリシー' : 'Privacy Policy'}</a>
         </div>
       </div>
